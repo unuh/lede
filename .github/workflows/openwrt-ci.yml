@@ -84,9 +84,6 @@ jobs:
       - name: 涡轮增雕进程
         run: |
           cd package
-          git clone https://github.com/project-openwrt/luci-app-koolproxyR.git
-          pwd
-          git clone https://github.com/xiaorouji/openwrt-passwall.git
           git clone https://github.com/kenzok8/openwrt-packages.git
 
 #       - name: 同步最新的源码
@@ -215,7 +212,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-watchcat=y
-          CONFIG_PACKAGE_luci-app-koolproxyR=y
           # CONFIG_PACKAGE_luci-app-ddns is not set
           # CONFIG_PACKAGE_luci-app-sfe is not set
           # CONFIG_PACKAGE_luci-app-ipsec-virtuald is not set
@@ -258,10 +254,6 @@ jobs:
           make download -j8 || make download -j1 V=s
           rm -rf $(find ./dl/ -size -1024c)
           df -h
-
-      - name: 编译koolproxyR
-        run: |
-          make package/luci-app-koolproxyR/{clean,compile} V=s
 
       - name: Compile firmware
         run: |
