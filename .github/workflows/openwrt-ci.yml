@@ -85,6 +85,7 @@ jobs:
         run: |
           cd package
           git clone https://github.com/project-openwrt/luci-app-koolproxyR.git
+          pwd
           git clone https://github.com/xiaorouji/openwrt-passwall.git
           git clone https://github.com/kenzok8/openwrt-packages.git
 
