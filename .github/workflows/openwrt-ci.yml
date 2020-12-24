@@ -84,16 +84,9 @@ jobs:
       - name: 涡轮增雕进程
         run: |
           cd package
-          mkdir hunu
-          cd hunu
-          git clone https://github.com/apollo-ng/luci-theme-darkmatter.git
-          # git clone https://github.com/aa65535/openwrt-chinadns.git
-          cd ..
+          git clone https://github.com/project-openwrt/luci-app-koolproxyR.git
           git clone https://github.com/xiaorouji/openwrt-passwall.git
           git clone https://github.com/kenzok8/openwrt-packages.git
-
-          # git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
-
 
 #       - name: 同步最新的源码
 #         run: |
@@ -189,7 +182,6 @@ jobs:
 
           # 常用LuCI插件选择:
           # DY-如需使用以下插件，请取消注释并移动到cat >> .config <<EOF内
-          # CONFIG_PACKAGE_luci-app-adbyby-plus=y
           # CONFIG_PACKAGE_luci-app-kodexplorer=y
           # CONFIG_PACKAGE_luci-app-openvpn=y
           # CONFIG_PACKAGE_luci-app-openvpn-server=y
@@ -204,35 +196,36 @@ jobs:
           # CONFIG_PACKAGE_luci-app-wrtbwmon=y
           # CONFIG_PACKAGE_luci-app-docker=y
           # CONFIG_PACKAGE_openwrt-chinadns=y
+          # CONFIG_PACKAGE_luci-app-passwall=y
+          # CONFIG_PACKAGE_luci-app-adguardhome=y
 
           cat >> .config <<EOF
+          CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-smartdns=y
-          CONFIG_PACKAGE_luci-app-passwall=y
           CONFIG_PACKAGE_luci-app-music-remote-center=y
-          CONFIG_PACKAGE_luci-app-autoreboot=y
-          CONFIG_PACKAGE_luci-app-adguardhome=y
-          CONFIG_PACKAGE_luci-app-unblockmusic=y
+          CONFIG_PACKAGE_luci-app-minidlna=y
           CONFIG_PACKAGE_luci-app-dnsforwarder=y
+          CONFIG_PACKAGE_luci-app-autoreboot=y
+          CONFIG_PACKAGE_luci-app-unblockmusic=y
           CONFIG_PACKAGE_luci-app-aria2=y
           CONFIG_PACKAGE_luci-app-baidupcs-web=y
           CONFIG_PACKAGE_luci-app-frpc=y
-          CONFIG_PACKAGE_luci-app-minidlna=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-watchcat=y
+          CONFIG_PACKAGE_luci-app-koolproxyR=y
           # CONFIG_PACKAGE_luci-app-ddns is not set
-          # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
           # CONFIG_PACKAGE_luci-app-sfe is not set
           # CONFIG_PACKAGE_luci-app-ipsec-virtuald is not set
           # CONFIG_PACKAGE_luci-app-xlnetacc is not set
           EOF
 
+          # CONFIG_PACKAGE_luci-theme-netgear=y
+
           # LuCI主题:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_luci-theme-netgear=y
-          CONFIG_PACKAGE_luci-theme-darkmatter=y
           EOF
 
           # 常用软件包:
@@ -264,6 +257,10 @@ jobs:
           make download -j8 || make download -j1 V=s
           rm -rf $(find ./dl/ -size -1024c)
           df -h
+
+      - name: 编译koolproxyR
+        run: |
+          make package/luci-app-koolproxyR/{clean,compile} V=s
 
       - name: Compile firmware
         run: |
