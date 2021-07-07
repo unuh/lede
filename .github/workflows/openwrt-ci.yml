@@ -84,6 +84,7 @@ jobs:
       - name: 涡轮增雕进程
         run: |
           cd package
+          git clone https://github.com/kenzok8/small.git
           git clone https://github.com/kenzok8/openwrt-packages.git
 
 #       - name: 同步最新的源码
@@ -167,6 +168,7 @@ jobs:
           CONFIG_PACKAGE_kmod-fs-nfs-v4=y
           CONFIG_PACKAGE_kmod-fs-ntfs=y
           CONFIG_PACKAGE_kmod-fs-squashfs=y
+          CONFIG_PACKAGE_kmod-fs-ntfs3=y
           EOF
 
           # USB3.0支持:
@@ -196,17 +198,18 @@ jobs:
           # CONFIG_PACKAGE_openwrt-chinadns=y
           # CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-adguardhome=y
+          # CONFIG_PACKAGE_luci-app-adbyby-plus=y
+          # CONFIG_PACKAGE_luci-app-music-remote-center=y
+          # CONFIG_PACKAGE_luci-app-minidlna=y
+          # CONFIG_PACKAGE_luci-app-unblockmusic=y
+          # CONFIG_PACKAGE_luci-app-aria2=y
+          # CONFIG_PACKAGE_luci-app-baidupcs-web=y
 
           cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-adbyby-plus=y
+          CONFIG_PACKAGE_luci-app-passwall=y
           CONFIG_PACKAGE_luci-app-smartdns=y
-          CONFIG_PACKAGE_luci-app-music-remote-center=y
-          CONFIG_PACKAGE_luci-app-minidlna=y
           CONFIG_PACKAGE_luci-app-dnsforwarder=y
           CONFIG_PACKAGE_luci-app-autoreboot=y
-          CONFIG_PACKAGE_luci-app-unblockmusic=y
-          CONFIG_PACKAGE_luci-app-aria2=y
-          CONFIG_PACKAGE_luci-app-baidupcs-web=y
           CONFIG_PACKAGE_luci-app-frpc=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
@@ -216,6 +219,11 @@ jobs:
           # CONFIG_PACKAGE_luci-app-sfe is not set
           # CONFIG_PACKAGE_luci-app-ipsec-virtuald is not set
           # CONFIG_PACKAGE_luci-app-xlnetacc is not set
+          # CONFIG_PACKAGE_adbyby is not set
+          # CONFIG_PACKAGE_autosamba is not set
+          # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+          # CONFIG_PACKAGE_luci-app-unblockmusic is not set
+
           EOF
 
           # CONFIG_PACKAGE_luci-theme-netgear=y
